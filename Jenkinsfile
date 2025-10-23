@@ -35,7 +35,9 @@
             
             stage('Run Container'){
                 stpes{
-                    bat 'docker run -d -p 3000:3000 %DOKCER_IMAGE%'
+                    bat 'docker stop %DOCKER_IMAGE% || echo "no container to stop"'
+                    bat 'docker rm %DOCKER_IMAGE% || echo "no container to remove"'
+                    bat 'docker run -d -p 3000:3000 --name %DOCKER_IMAGE% %DOCKER_IMAGE%'
                     }
                 }
             
@@ -43,3 +45,4 @@
     }        
             
     
+
